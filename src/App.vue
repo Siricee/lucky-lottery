@@ -46,7 +46,7 @@
               <span
                 v-if="!!list.find(d => d.key === item)"
                 :style="{
-                  fontSize: '8px'
+                  fontSize: '30px'
                 }"
               >
                 {{ list.find(d => d.key === item).name }}
@@ -168,8 +168,8 @@ export default {
     },
     datas() {
       const { number } = this.config;
-      const nums = number >= 1500 ? 500 : this.config.number;
-      const configNum = number > 1500 ? Math.floor(number / 3) : number;
+      const nums = number >= 800 ? 80 : this.config.number;
+      const configNum = number;
       const randomShowNums = luckydrawHandler(configNum, [], nums);
       const randomShowDatas = randomShowNums.map(item => {
         const listData = this.list.find(d => d.key === item);
@@ -427,6 +427,7 @@ export default {
 }
 #main {
   height: 100%;
+  background-color: rgb(84, 30, 36);
 }
 
 #resbox {
@@ -448,7 +449,7 @@ export default {
   }
   .itemres {
     background: #fff;
-    width: 160px;
+    width: 600px;
     height: 160px;
     border-radius: 4px;
     border: 1px solid #ccc;
