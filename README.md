@@ -1,6 +1,12 @@
-## 年会抽奖
+### 项目来源
 
-[演示地址](https://vitozyf.github.io/lucky-draw/index.html#/?tdsourcetag=s_pctim_aiomsg)
+本项目来自 [vitozyf/lucky-draw: 年会抽奖程序](https://github.com/vitozyf/lucky-draw)
+
+项目作者目前看起来似乎不再维护。由于百度分公司市场部活动采用，本人暂时维护。
+
+# 年会抽奖
+
+预览地址：[luckydraw](https://luckylottery.netlify.app/#/)
 
 ## 使用说明
 
@@ -39,22 +45,46 @@
 - 按照 抽奖号-照片的一对一导入，（可在现场将号码发出签到后，每发一个号码，导入一个照片）。抽奖结果将以照片形式展示。
 - 照片格式支持`.jpg`和`.png`，照片大小不能超过 `150kb`,建议 `20-50kb`，建议尺寸为 `160*160px`
 
+---
+## 维护者添加
+
+**经实际测试，原项目有两个问题:**
+
+1. 生产环境下直接部署会产生资源404，这是由于 `vue.config.js` 中配置了生产模式下的路径，现已经解决。改为默认当前目录。
+
+2. 当导入数据量过多(800以上)时，抽奖圆球的密度会过大，美观度不足。所以隐藏了部分显示，但实际抽奖还是从全部数据中抽的。
+
+  修改过程：`src/app.vue` 文件：
+
+  ```diff
+      datas() {
+        const { number } = this.config;
+  -      const nums = number >= 1500 ? 500 : this.config.number;
+  -      const configNum = number > 1500 ? Math.floor(number / 3) : number;
+  +      const nums = number >= 800 ? 80 : this.config.number;
+  +      const configNum = number;
+        const randomShowNums = luckydrawHandler(configNum, [], nums);
+      }
+  ```
+  将最大实际显示值从500改为80。
+
+（其实上面这个问题可以在 `src/store/index.js` 中配置）
+
+另外修改了下抽奖结果卡片的样式，这里不赘述。
+
+**除以上问题外，这个库将原项目中的音效等去除，仅在代码中注释，资源文件和实际控件还保留。**
+
+---
 ## 温馨提示
 
 - 本抽奖程序无暗箱操作，无后台，无后门。
 - 名单和照片显示只需导入一种即可,无导入数据则使用抽奖号码。
 - 建议使用最新的 Chrome 浏览器打开体验最佳。
-- 由于背景音乐加载较慢，可以在抽奖前提前打开缓存好。或者安装 windows 版本软件到本地，无需联网即可使用。
+- <del>由于背景音乐加载较慢，可以在抽奖前提前打开缓存好。或者安装 windows 版本软件到本地，无需联网即可使用。</del>
 
 ## windows 软件版本
 
 - 本抽奖程序的 windows 软件版本下载[安装包](https://github.com/vitozyf/lucky-draw/releases)
-
-## Donation
-
-如果这个开源项目对您有帮助，请作者喝杯咖啡吧。
-
-![payimg](./public/pay.png)
 
 ## License
 
