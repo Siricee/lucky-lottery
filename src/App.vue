@@ -168,7 +168,7 @@ export default {
     },
     datas() {
       const { number } = this.config;
-      const nums = number >= 300 ? 80 : this.config.number;
+      const nums = number >= 80 ? 80 : this.config.number;
       const configNum = number;
       const randomShowNums = luckydrawHandler(configNum, [], nums);
       const randomShowDatas = randomShowNums.map(item => {
